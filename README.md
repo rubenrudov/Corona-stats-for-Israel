@@ -2,6 +2,8 @@
 ## An open source app in android for viewing corona stats in Israel easily every day.
 ### Presented by Ruben Rudov and ([Adam Live](https://github.com/adamal92)).
 
+The app scrapes and manipulates data from official stats to a comfort and user-friendly interface.
+
 ### Main app features in V 1.0: 
   - Corona stats view for each city in Israel with a daily update.
   - Corona stats for the whole country.
