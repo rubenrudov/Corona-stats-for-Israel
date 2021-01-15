@@ -1,6 +1,6 @@
 # Ramzor :vertical_traffic_light: :israel:
 ## An open source app in android for viewing corona stats in Israel easily every day.
-### Presented by Ruben Rudov and ([Adam Livne](https://github.com/adamal92)).
+### Presented by Ruben Rudov and [Adam Livne](https://github.com/adamal92).
 
 The app scrapes and manipulates data from official stats for Israel (Data.gov.il) to a comfort and user-friendly interface.
 For now the app supports only Hebrew.
