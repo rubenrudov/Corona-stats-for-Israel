@@ -20,9 +20,16 @@ The app scrapes and manipulates data from official stats to a comfort and user-f
  - Write the name of the city you prefer to search stats about and tap the search button.
  - Scroll the view down to see the whole stats.
  
- 
-The app will be fully open source after been published.
+ ### For other developers:
+  - You can tryout the app yourself but you won't be able to use the data from the database.
+  - The data we've used is from Data.gov.il, you can try scrape the data too.
+  - If you have any suggetion, please write us on the email I mention below.
+  - If you use interface, please, let us know how it is. :smiley:
+  - For now, IOS version isn't in our plans. If you are an IOS developer and you'd like build an IOS version of the app contact us and we'll discuss about it.
+  
+
+The app will be fully open source after been published on google play.
 Your privacy is important for us, we don't & won't take any kind of data from your phone. 
 Tnx for viewing our project. 
 
-For any question write me an E-mail: rudovruben4all@gmail.com
+**For any question write me an E-mail: rudovruben4all@gmail.com**
