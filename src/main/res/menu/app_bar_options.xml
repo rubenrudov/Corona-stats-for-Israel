@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
     <item
-        android:id="@+id/cityCharts"
-        android:title="עזרה"
-        android:icon="@drawable/ic_info"
+        android:id="@+id/filterCountries"
+        android:title="פילטרים"
+        android:icon="@drawable/ic_search"
         android:orderInCategory="90"
         app:showAsAction="always"/>
 </menu>
