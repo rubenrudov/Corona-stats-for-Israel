@@ -3,6 +3,7 @@
 ### Presented by Ruben Rudov and ([Adam Livne](https://github.com/adamal92)).
 
 The app scrapes and manipulates data from official stats to a comfort and user-friendly interface.
+For now the app supports only Hebrew.
 
 ### Main app features in V 1.0: 
   - Corona stats view for each city in Israel with a daily update.
