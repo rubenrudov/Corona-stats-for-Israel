@@ -32,4 +32,4 @@ The app will be fully open source after been published on google play.
 Your privacy is important for us, we don't & won't take any kind of data from your phone. 
 Tnx for viewing our project. 
 
-**For any question write me an E-mail: rudovruben4all@gmail.com**
+**For any question write me an E-mail: rudovruben4all@gmail.com :+1:**
