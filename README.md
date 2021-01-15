@@ -23,6 +23,7 @@ For now the app supports only Hebrew.
  
  ### For other developers:
   - You can tryout the app yourself but you won't be able to use the data from the database.
+  - For trying, download the src/main path and paste in your project instead the main path in your project.
   - The data we've used is from Data.gov.il, you can try scrape the data too.
   - If you have any suggetion, please write us on the email I mention below.
   - If you use interface, please, let us know how it is. :smiley:
