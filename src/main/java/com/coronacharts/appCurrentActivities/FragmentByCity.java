@@ -79,7 +79,7 @@ public class FragmentByCity extends Fragment {
                             String[] date = cityStats[0].getDate().split("-");
                             String format = date[2] + "/" + date[1] + "/" + date[0];
                             // Set stats in TextViews
-                            cityName.setText(cityStats[0].getCity_Name() + " נכון לתאריך: \n" + format);
+                            cityName.setText(cityStats[0].getCity_Name().replaceAll("שבט", "").replace("(", "").replace(")", "") + " נכון לתאריך: \n" + format);
                             vaccined.setText(cityStats[0].getCumulated_vaccinated());
                             verified.setText(cityStats[0].getCumulative_verified_cases());
                             recovered.setText(cityStats[0].getCumulated_recovered());
