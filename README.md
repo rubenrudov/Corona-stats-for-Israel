@@ -2,7 +2,9 @@
 ## An open source app in android for viewing corona stats in Israel easily every day.
 ### Presented by Ruben Rudov and [Adam Livne](https://github.com/adamal92).
 
-The app scrapes and manipulates data from official stats for Israel (Data.gov.il) to a comfort and user-friendly interface.
+The app goal is be a comfort and user-friendly interface for viewing corona-virus stats in Israel.
+The app is using a big-data server interface for scraping and saving of data.
+The scraper takes data from data.gov.il.
 For now the app supports only Hebrew.
 
 ### Main app features in V 1.0: 
