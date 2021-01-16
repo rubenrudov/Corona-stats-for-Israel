@@ -99,8 +99,7 @@ def to_spark_direct_upside_down(cities: dict):
                 "schema": schema,
                 "data": final_result,
                 "filteresDF": filteresDF.toJSON().collect(),
-                "ok": filteresDF.toPandas().to_dict(),
-                "shit": cities_final_df.toPandas().to_dict()
+                "ok": filteresDF.toPandas().to_dict()
             }
         }
     )  # load to firebase
@@ -190,9 +189,9 @@ def main():
     logging.getLogger('my_log').setLevel(logging.DEBUG)
 
     try:
-        # Constants.SCHEDULER.start()
-        firebase_config()
-        crawl_corona()
+        Constants.SCHEDULER.start()
+        # firebase_config()
+        # crawl_corona()
     finally:
         winsound.MessageBeep(winsound.MB_ICONHAND)
         logging.debug(f"Program Total Time: {time.time() - st} seconds")
