@@ -2,28 +2,30 @@
 ## An open source app in android for viewing corona stats in Israel easily every day.
 ### Presented by Ruben Rudov and [Adam Livne](https://github.com/adamal92).
 
-The app goal is be a comfort and user-friendly interface for viewing corona-virus stats in Israel.
-The app is using a big-data server interface for scraping and saving of data.
-The scraper takes data from data.gov.il.
-For now the app supports only Hebrew.
+The app goal is be a comfort and user-friendly platform for viewing corona-virus stats in Israel.
+The app is using a big-data research server for scraping and saving of data from a reliable source of information.
+The data was taken and was re-formatted from data.gov.il.
+### Important: for now the app supports only Hebrew.
 
 ### Main app features in V 1.0: 
   - Corona stats view for each city in Israel with a daily update.
-  - Corona stats for the whole country.
-  - Country stat list with filtering options (GREEN/RED countries of the world)
+  - Graphs for some topics.
+  - List of red and green countries with filtering option.
   
   
 ### Upcoming features in V 1.1:
   - Comparison between cities by the corona parameters per X citizens.
-  - More options of stats.
-  - "Ramzor" grade for each city when it will be possible.
-  - Charts and graphs for some topics.
+  - More options of stats like the % of the positive corona tests in each city.
+  - "Ramzor" grade for each city when it will be possible for us.
   
-### User guide: 
+### User guide for the by-city filtering feature and the countries list feature: 
  - Open the app.
  - Navigate to "לפי עיר".
  - Write the name of the city you prefer to search stats about and tap the search button.
  - Scroll the view down to see the whole stats.
+ - If you'd like to check if there are grren countries go to: "רשימה מדינות"
+ - Filter by the keyword "ירוק"
+ 
  
  ### For other developers:
   - You can tryout the app yourself but you won't be able to use the data from the database.
