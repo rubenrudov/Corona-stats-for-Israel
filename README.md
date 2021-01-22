@@ -1,4 +1,4 @@
-# Ramzor :vertical_traffic_light: :israel:
+# HaRamzor :vertical_traffic_light: :israel:
 ## An open source app in android for viewing corona stats in Israel easily every day.
 ### Presented by Ruben Rudov and [Adam Livne](https://github.com/adamal92).
 
