@@ -87,7 +87,9 @@ public class FragmentGraphs extends Fragment {
         graph1 = view.findViewById(R.id.graph1);
         graph1.setVisibility(View.INVISIBLE);
         String currentCity = "ירושלים";
-        treeSearching(currentCity);
+        treeSearching(currentCity, graph1, "חולים לפי תאריך");
+        // treeSearching(currentCity, graph1, "מתים לפי תאריך");
+        // treeSearching(currentCity, graph1, "מחלימים לפי תאריך");
     }
 
     @Override
@@ -100,8 +102,8 @@ public class FragmentGraphs extends Fragment {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 treeSearching(query, graph1, "חולים לפי תאריך");
-                // treeSearching(query, graph2);
-                // treeSearching(query, graph3);
+                // treeSearching(query, graph2,  );
+                // treeSearching(query, graph3, );
                 return true;
             }
 
@@ -154,7 +156,7 @@ public class FragmentGraphs extends Fragment {
                             i++;
                         }
                         if (values.size() != 0){
-                            title1.setText(parameterForSearch + "ב:" + finalQuery[0]);
+                            title1.setText(parameterForSearch + " ב: " + finalQuery[0]);
                             updateGraph(new ArrayList<>(values), graph);
                         }
                         else {
