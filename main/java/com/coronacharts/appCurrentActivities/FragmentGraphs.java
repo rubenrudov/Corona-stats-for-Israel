@@ -84,12 +84,18 @@ public class FragmentGraphs extends Fragment {
 
     private void setElements() {
         title1 = view.findViewById(R.id.graph1_title);
+        title2 = view.findViewById(R.id.graph2_title);
+        title3 = view.findViewById(R.id.graph3_title);
         graph1 = view.findViewById(R.id.graph1);
         graph1.setVisibility(View.INVISIBLE);
-        String currentCity = "ירושלים";
-        treeSearching(currentCity, graph1, "חולים לפי תאריך");
-        // treeSearching(currentCity, graph1, "מתים לפי תאריך");
-        // treeSearching(currentCity, graph1, "מחלימים לפי תאריך");
+        graph2 = view.findViewById(R.id.graph2);
+        graph2.setVisibility(View.INVISIBLE);
+        graph3 = view.findViewById(R.id.graph3);
+        graph3.setVisibility(View.INVISIBLE);
+        String query = "ירושלים";
+        treeSearching(query, graph1, "חולים לפי תאריך", title1);
+        treeSearching(query, graph2, "חולים לפי תאריך", title2);
+        treeSearching(query, graph3, "חולים לפי תאריך", title3);
     }
 
     @Override
@@ -101,9 +107,9 @@ public class FragmentGraphs extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                treeSearching(query, graph1, "חולים לפי תאריך");
-                // treeSearching(query, graph2,  );
-                // treeSearching(query, graph3, );
+                treeSearching(query, graph1,"חולים לפי תאריך", title1);
+                treeSearching(query, graph2,  "חולים לפי תאריך", title2);
+                treeSearching(query, graph3, "חולים לפי תאריך", title3);
                 return true;
             }
 
@@ -130,7 +136,7 @@ public class FragmentGraphs extends Fragment {
     }
 
     @SuppressLint("SetTextI18n")
-    private void treeSearching(final String query, final LineChart graph, final String parameterForSearch) {
+    private void treeSearching(final String query, final LineChart graph, final String parameterForSearch, final TextView title) {
         final String[] finalQuery = new String[1];
         DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("graphs").child(parameterForSearch);
         databaseReference1.addValueEventListener(new ValueEventListener() {
@@ -156,8 +162,9 @@ public class FragmentGraphs extends Fragment {
                             i++;
                         }
                         if (values.size() != 0){
-                            title1.setText(parameterForSearch + " ב: " + finalQuery[0]);
+                            title.setText(parameterForSearch + " ב: " + finalQuery[0]);
                             updateGraph(new ArrayList<>(values), graph);
+                            finalQuery[0] = null;
                         }
                         else {
                             Toast.makeText(getContext(), "העיר אינה קיימת במאגר", Toast.LENGTH_SHORT).show();
@@ -180,7 +187,7 @@ public class FragmentGraphs extends Fragment {
 
     private void updateGraph(ArrayList<Entry> values, LineChart graph) {
         // Creates a graph
-        graph1.setVisibility(View.VISIBLE);
+        graph.setVisibility(View.VISIBLE);
         lineDataSet.setValues(values);
         lineDataSet.setLabel("חולים לפי תאריך");
         sets.clear();
