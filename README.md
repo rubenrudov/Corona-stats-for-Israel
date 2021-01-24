@@ -1,10 +1,8 @@
-# HaRamzor :vertical_traffic_light: :israel:
+# נתוני קורונה לישראל :vertical_traffic_light: :israel:
 ## An open source app in android for viewing corona stats in Israel easily every day.
-### Presented by Ruben Rudov and [Adam Livne](https://github.com/adamal92).
+### נכתבה על ידי רובן רודוב ו [אדם ליבנה](https://github.com/adamal92).
 
-The app goal is be a comfort and user-friendly platform for viewing corona-virus stats in Israel.
-The app is using a big-data research server for scraping and saving of data from a reliable source of information.
-The data was taken and was re-formatted from data.gov.il.
+מטרתה של אפליקציה זו היא להוות פלטפורמה לצריכת נתונים בצורה נוחה וידידותית למשתמש בזמן אמת.
 ### Important: for now the app supports only Hebrew.
 
 ### Main app features in V 1.0: 
