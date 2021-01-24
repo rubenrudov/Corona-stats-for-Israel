@@ -1,6 +1,7 @@
 package com.coronacharts.appCurrentActivities;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.SearchView;
@@ -76,7 +78,6 @@ public class FragmentRedCountries extends Fragment {
             public boolean onQueryTextSubmit(String query) {
                 return false;
             }
-
             @Override
             public boolean onQueryTextChange(String searchText) {
                 countriesAdapter.getFilter().filter(searchText);
@@ -90,12 +91,10 @@ public class FragmentRedCountries extends Fragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.guide)
         {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-            View viewGroup = view.findViewById(android.R.id.custom);
-            View dialogView = LayoutInflater.from(view.getContext()).inflate(R.layout.guide_diaglog, (ViewGroup) viewGroup, false);
-            builder.setView(dialogView);
-            AlertDialog alertDialog = builder.create();
-            alertDialog.show();
+            Dialog dialog = new Dialog(Objects.requireNonNull(getContext()));
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.guide_diaglog);
+            dialog.show();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -109,7 +108,6 @@ public class FragmentRedCountries extends Fragment {
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), linearLayoutManager.getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
         recyclerView.setAdapter(countriesAdapter);
-
     }
 
     private void searchTree() {
