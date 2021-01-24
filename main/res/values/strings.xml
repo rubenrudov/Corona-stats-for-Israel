@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">נתוני קורונה לישראל</string>
+    <string name="credits_for_data">הזכויות על הנתונים שמורות למאגרי המידע הממשלתיים</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="by_city_fragment_title">עירוני</string>
+    <string name="whole_country_fragment_title">ארצי</string>
+    <string name="states_list">יעדים</string>
+    <string name="country_sickness_stat">ארצי</string>
+    <string name="graphs_frag_title">גרפים</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

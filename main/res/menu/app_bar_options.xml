@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <item
+        android:id="@+id/guide"
+        android:title="הסבר"
+        android:icon="@drawable/ic_info"
+        app:iconTint="@android:color/white"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/filterCountries"
+        android:title="חיפוש"
+        android:icon="@drawable/ic_search"
+        app:iconTint="@android:color/white"
+        app:actionViewClass="android.widget.SearchView"
+        app:showAsAction="always"/>
+</menu>
