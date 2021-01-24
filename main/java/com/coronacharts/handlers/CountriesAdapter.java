@@ -65,21 +65,23 @@ public class CountriesAdapter extends RecyclerView.Adapter<CountriesAdapter.View
                 viewHolder.country.setTextColor(Color.BLACK);
                 break;
         }
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, Country.class);
-                intent.putExtra("Name", CountriesAdapter.this.countriesDuplicate.get(index).getName());
-                intent.putExtra("Status", CountriesAdapter.this.countriesDuplicate.get(index).getStatus());
-                // intent.putExtra("Name", CountriesAdapter.this.countriesDuplicate.get(index).getIsoType());
-                // intent.putExtra("Name", CountriesAdapter.this.countriesDuplicate.get(index).getLastUpdate());
-                final DestinationDataDialog dialog = new DestinationDataDialog(context, intent);
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.setContentView(R.layout.guide_diaglog);
-                // TODO: Create dialog view of country & it's data following the db
-                dialog.show();
-            }
-        });
+        
+        if(!country.getStatus().equals("סטטוס")){
+            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, Country.class);
+                    intent.putExtra("Name", CountriesAdapter.this.countriesDuplicate.get(index).getName());
+                    intent.putExtra("Status", CountriesAdapter.this.countriesDuplicate.get(index).getStatus());
+                    // intent.putExtra("Name", CountriesAdapter.this.countriesDuplicate.get(index).getIsoType());
+                    // intent.putExtra("Name", CountriesAdapter.this.countriesDuplicate.get(index).getLastUpdate());
+                    final DestinationDataDialog dialog = new DestinationDataDialog(context, intent);
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialog.setContentView(R.layout.guide_diaglog);
+                    dialog.show();
+                }
+            });
+        }
     }
 
     @Override
