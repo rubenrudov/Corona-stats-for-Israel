@@ -2,6 +2,7 @@ package com.coronacharts.appCurrentActivities;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.drawable.Drawable;
@@ -18,6 +19,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -125,12 +127,10 @@ public class FragmentGraphs extends Fragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.guide)
         {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-            View viewGroup = view.findViewById(android.R.id.custom);
-            View dialogView = LayoutInflater.from(view.getContext()).inflate(R.layout.guide_diaglog, (ViewGroup) viewGroup, false);
-            builder.setView(dialogView);
-            AlertDialog alertDialog = builder.create();
-            alertDialog.show();
+            Dialog dialog = new Dialog(Objects.requireNonNull(getContext()));
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.guide_diaglog);
+            dialog.show();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -203,6 +203,7 @@ public class FragmentGraphs extends Fragment {
     }
 
     private static class DateValueFormatter extends ValueFormatter implements IAxisValueFormatter{
+        // Date formatter
         @Override
         public String getFormattedValue(float value, AxisBase axis) {
             Date date = new Date((long) value);
