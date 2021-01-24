@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -58,9 +59,8 @@ public class FragmentGraphs extends Fragment {
 
     private DatabaseReference databaseReference;
     private View view;
-    TextView title1, title2, title3;
-    private LineChart graph1;
-    private LineData lineData;
+    private TextView title1, title2, title3;
+    private LineChart graph1, graph2, graph3;
     private LineDataSet lineDataSet = new LineDataSet(null, null);
     private ArrayList<ILineDataSet> sets = new ArrayList<>();
 
@@ -86,7 +86,8 @@ public class FragmentGraphs extends Fragment {
         title1 = view.findViewById(R.id.graph1_title);
         graph1 = view.findViewById(R.id.graph1);
         graph1.setVisibility(View.INVISIBLE);
-        treeSearching("ירושלים");
+        String currentCity = "ירושלים";
+        treeSearching(currentCity);
     }
 
     @Override
@@ -98,7 +99,9 @@ public class FragmentGraphs extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                treeSearching(query);
+                treeSearching(query, graph1, "חולים לפי תאריך");
+                // treeSearching(query, graph2);
+                // treeSearching(query, graph3);
                 return true;
             }
 
@@ -125,32 +128,51 @@ public class FragmentGraphs extends Fragment {
     }
 
     @SuppressLint("SetTextI18n")
-    public void treeSearching(final String query) {
-        databaseReference = FirebaseDatabase.getInstance().getReference("graphs").child("חולים לפי תאריך").child(query).child("data").child("Cumulative_verified_cases");
-        databaseReference.addValueEventListener(new ValueEventListener() {
+    private void treeSearching(final String query, final LineChart graph, final String parameterForSearch) {
+        final String[] finalQuery = new String[1];
+        DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("graphs").child(parameterForSearch);
+        databaseReference1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ArrayList<Entry> values = new ArrayList<>();
-                int i = 0;
-                for (DataSnapshot dataSnapshot: snapshot.getChildren()){
-                    assert dataSnapshot.getValue() != null;
-                    values.add(new Entry(i, Integer.parseInt((String) dataSnapshot.getValue())));
-                    i++;
+                for(DataSnapshot val : snapshot.getChildren()){
+                    if(Objects.requireNonNull(val.getKey()).contains(query)){
+                        finalQuery[0] = val.getKey();
+                        break;
+                    }
                 }
-                if (values.size() != 0){
-                    title1.setText("חולים לפי תאריך ב: " + query);
-                    updateGraph(new ArrayList<>(values), graph1);
-                }
-                else {
-                    Toast.makeText(getContext(), "העיר אינה קיימת במאגר", Toast.LENGTH_SHORT).show();
-                }
+                if (finalQuery[0] == null)
+                    finalQuery[0] = query;
+                databaseReference = FirebaseDatabase.getInstance().getReference("graphs").child(parameterForSearch).child(finalQuery[0]).child("data").child("Cumulative_verified_cases");
+                databaseReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        ArrayList<Entry> values = new ArrayList<>();
+                        int i = 0;
+                        for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+                            assert dataSnapshot.getValue() != null;
+                            values.add(new Entry(i, Integer.parseInt((String) dataSnapshot.getValue())));
+                            i++;
+                        }
+                        if (values.size() != 0){
+                            title1.setText(parameterForSearch + "ב:" + finalQuery[0]);
+                            updateGraph(new ArrayList<>(values), graph);
+                        }
+                        else {
+                            Toast.makeText(getContext(), "העיר אינה קיימת במאגר", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
-
     }
 
 
@@ -161,7 +183,7 @@ public class FragmentGraphs extends Fragment {
         lineDataSet.setLabel("חולים לפי תאריך");
         sets.clear();
         sets.add(lineDataSet);
-        lineData = new LineData(sets);
+        LineData lineData = new LineData(sets);
         graph.clear();
         graph.getDescription().setEnabled(false);
         graph.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -181,3 +203,4 @@ public class FragmentGraphs extends Fragment {
         }
     }
 }
+
