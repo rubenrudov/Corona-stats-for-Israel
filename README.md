@@ -1,5 +1,5 @@
 # נתוני קורונה לישראל :vertical_traffic_light: :israel:
-## An open source app in android for viewing corona stats in Israel easily every day.
+## אפליקציית קוד פתוח להצגת נתוני הקורונה בזמן אמת
 ### נכתבה על ידי רובן רודוב ו[אדם ליבנה](https://github.com/adamal92).
 
 מטרתה של אפליקציה זו היא להוות פלטפורמה לצריכת נתונים בצורה נוחה וידידותית למשתמש בזמן אמת
