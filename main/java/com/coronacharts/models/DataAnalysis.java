@@ -8,9 +8,9 @@ public class DataAnalysis {
 
     public DataAnalysis(String status){
         this.status = status;
-        if (this.status.equals("אדום")) {
+        if (this.status.contains("אדום")) {
             this.result = "השבים ממדינה זו מחוייבים להכנס לבידוד מרגע הנחיתה בארץ \n נכון לרגע זה, רמת התחלואה במדינה גבוהה והיא מוגדרת כמדינה אדומה";
-        } else {
+        } else if (this.status.contains("ירוק")){
             this.result = "יש להתעדכן באופן שוטף בהנחיות משרד הבריאות \n יש לקחת בחשבון שהמדינה יכולה להפוך לאדומה לפי רמת התחלואה בה בכל עת";
         }
     }
