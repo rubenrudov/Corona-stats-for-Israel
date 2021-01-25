@@ -1,18 +1,12 @@
 package com.coronacharts.appCurrentActivities;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.graphics.Canvas;
-import android.graphics.ColorFilter;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,14 +15,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.coronacharts.R;
-import com.coronacharts.handlers.GraphPoint;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
@@ -36,7 +27,6 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.google.firebase.database.DataSnapshot;
@@ -45,14 +35,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.EventListener;
-import java.util.Map;
 import java.util.Objects;
-import java.util.SimpleTimeZone;
 
 /**
  * Fragment for displaying graphs with crucial data and conclusions of the situations..
@@ -64,7 +50,11 @@ public class FragmentGraphs extends Fragment {
     private TextView title1, title2, title3;
     private LineChart graph1, graph2, graph3;
     private LineDataSet lineDataSet = new LineDataSet(null, null);
-    private ArrayList<ILineDataSet> sets = new ArrayList<>();
+    private LineDataSet lineDataSet2 = new LineDataSet(null, null);
+    private LineDataSet lineDataSet3 = new LineDataSet(null, null);
+    private ArrayList<ILineDataSet> sets1 = new ArrayList<>();
+    private ArrayList<ILineDataSet> sets2 = new ArrayList<>();
+    private ArrayList<ILineDataSet> sets3 = new ArrayList<>();
 
     public FragmentGraphs() {
         // Required empty constructor
@@ -95,9 +85,9 @@ public class FragmentGraphs extends Fragment {
         graph3 = view.findViewById(R.id.graph3);
         graph3.setVisibility(View.INVISIBLE);
         String query = "ירושלים";
-        treeSearching(query, graph1, "חולים לפי תאריך", title1);
-        treeSearching(query, graph2, "חולים לפי תאריך", title2);
-        treeSearching(query, graph3, "חולים לפי תאריך", title3);
+        treeSearching(query, graph1, "Cumulative_verified_cases", title1, sets1, lineDataSet);
+        treeSearching(query, graph2, "Cumulated_recovered", title2, sets2, lineDataSet2);
+        treeSearching(query, graph3, "Cumulated_deaths", title3, sets3, lineDataSet3);
     }
 
     @Override
@@ -109,9 +99,9 @@ public class FragmentGraphs extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                treeSearching(query, graph1,"חולים לפי תאריך", title1);
-                treeSearching(query, graph2,  "חולים לפי תאריך", title2);
-                treeSearching(query, graph3, "חולים לפי תאריך", title3);
+                treeSearching(query, graph1,"Cumulative_verified_cases", title1, sets1, lineDataSet);
+                treeSearching(query, graph2,  "Cumulated_recovered", title2, sets2, lineDataSet2);
+                treeSearching(query, graph3, "Cumulated_deaths", title3, sets3, lineDataSet3);
                 return true;
             }
 
@@ -136,9 +126,9 @@ public class FragmentGraphs extends Fragment {
     }
 
     @SuppressLint("SetTextI18n")
-    private void treeSearching(final String query, final LineChart graph, final String parameterForSearch, final TextView title) {
+    private void treeSearching(final String query, final LineChart graph, final String parameterForSearch, final TextView title, final ArrayList<ILineDataSet> sets, final LineDataSet lineDataSetFun) {
         final String[] finalQuery = new String[1];
-        DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("graphs").child(parameterForSearch);
+        DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("graphs_3").child("חולים לפי תאריך");
         databaseReference1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -150,7 +140,7 @@ public class FragmentGraphs extends Fragment {
                 }
                 if (finalQuery[0] == null)
                     finalQuery[0] = query;
-                databaseReference = FirebaseDatabase.getInstance().getReference("graphs").child(parameterForSearch).child(finalQuery[0]).child("data").child("Cumulative_verified_cases");
+                databaseReference = FirebaseDatabase.getInstance().getReference("graphs_3").child("חולים לפי תאריך").child(finalQuery[0]).child("data").child(parameterForSearch);
                 databaseReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -162,8 +152,12 @@ public class FragmentGraphs extends Fragment {
                             i++;
                         }
                         if (values.size() != 0){
-                            title.setText(parameterForSearch + " ב: " + finalQuery[0]);
-                            updateGraph(new ArrayList<>(values), graph);
+                            String toTitle = "";
+                            if(parameterForSearch.contains("verified")) {toTitle = "חולים לפי תאריך";}
+                            else if(parameterForSearch.contains("recovered")) {toTitle = "מחלימים לפי תאריך";}
+                            else if(parameterForSearch.contains("deaths")) {toTitle = "מתים לפי תאריך";}
+                            title.setText(toTitle + " ב: " + finalQuery[0]);
+                            updateGraph(new ArrayList<>(values), graph, title.getText().toString(), sets, lineDataSetFun);
                             finalQuery[0] = null;
                         }
                         else {
@@ -185,13 +179,13 @@ public class FragmentGraphs extends Fragment {
     }
 
 
-    private void updateGraph(ArrayList<Entry> values, LineChart graph) {
+    private void updateGraph(ArrayList<Entry> values, LineChart graph, String labelTitle, ArrayList<ILineDataSet> sets, LineDataSet lineDataSetFun) {
         // Creates a graph
         graph.setVisibility(View.VISIBLE);
-        lineDataSet.setValues(values);
-        lineDataSet.setLabel("חולים לפי תאריך");
+        lineDataSetFun.setValues(values);
+        lineDataSetFun.setLabel(labelTitle);
         sets.clear();
-        sets.add(lineDataSet);
+        sets.add(lineDataSetFun);
         LineData lineData = new LineData(sets);
         graph.clear();
         graph.getDescription().setEnabled(false);
