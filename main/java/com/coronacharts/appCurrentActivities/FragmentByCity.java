@@ -40,7 +40,7 @@ import java.util.Objects;
 public class FragmentByCity extends Fragment {
     private DatabaseReference databaseReference;
     private EditText editTextCityInsert;
-    private TextView cityName, vaccined, verified, tests, recovered, deaths;
+    private TextView cityName, verified, tests, recovered, deaths;
     private View view;
     private CityStats[] cityStats = new CityStats[1];
 
@@ -57,7 +57,6 @@ public class FragmentByCity extends Fragment {
     private void setElements() {
         databaseReference = FirebaseDatabase.getInstance().getReference().child("cities_final");
         cityName = view.findViewById(R.id.cityName);
-        vaccined = view.findViewById(R.id.vaccined);
         verified = view.findViewById(R.id.verified);
         tests = view.findViewById(R.id.tests);
         recovered = view.findViewById(R.id.healed);
