@@ -1,23 +1,20 @@
-# נתוני קורונה לישראל :vertical_traffic_light: :israel:
-## אפליקציית קוד פתוח להצגת נתוני הקורונה בזמן אמת
-### נכתבה על ידי רובן רודוב ו[אדם ליבנה](https://github.com/adamal92).
+# Israel Covid-19 live stats.
+## Developed by: Ruben Rudov and Adam Livne in 2021.
 
-מטרתה של אפליקציה זו היא להוות פלטפורמה לצריכת נתונים בצורה נוחה וידידותית למשתמש בזמן אמת
-### בגרסאות הראשונות, האפליקציה תהיה זמינה רק בעברית
-  
-### מדריך למשתמש 
- בחר/י בפיצ'ר: עירוני 
- לחץ/י על אייקון הזכוכית המגדלת וחפש/י את העיר שברצונך לברר לגביה נתונים
- צפה/י בנתונים
- אם ברצונך לברר לגבי מדינות יעד יש לנווט לפיצ'ר היעדים ולחפש באייקון החיפוש את המדינה וללחוץ על האייטם שלה ברשימה שמופיעה
- כדי לחפש את כל המדינות הירוקות ניתן לרשום "ירוק" בחיפוש
- על מנת למצוא גרפי תחלואה לפי עיר ניתן לחפש באותה צורה כמו בפיצ'ר של הערים את העיר המתבקשת ולראות את הגרפים שלה
+The purpose of our app is to provide a platform for Israel's citizens for viewing Israel Covid-19 stats (The whole process was finished before the "Ramzor" app was published and the development stopped as soon as the official app was published).
 
-האפליקציה תהיה אפליקציית קוד פתוח לאחר יציאתה לחנות וניתן יהיה לנסות את הקוד שלה ולנסות להציע פתרונות ורעיונות נוספים
+Technologies: Android Studio (Java & XML), Firebase (Database & Site hosting), Python (For Big-Data server).
 
-התוכנה זמינה להורדה למכשירי האנדרואיד באתר:
-[download](https://rubyadam-df256.firebaseapp.com/)
+The app is available for [download](https://rubyadam-df256.firebaseapp.com/), the server was forced down on 27/02/2021.
 
-## להצעות, שאלות ושיתופי פעולה ניתן לפנות במייל או בלינקדאין
-### E-mail: rudovruben4all@gmail.com
-### Linkedin: Ruben Rudov
+### Get started:
+* Clone the repo
+* Create a new Firebase project and connect it to the python server by changing the vitals in the firebaseConfig file.
+* Connect the new project to your android project.
+* Read your data (In our case it was from israel's data.gov site).
+* Have fun and keep hacking 🙂 !
+
+For suggestions, cooperations and more:
+[Ruben's Linked-in](https://www.linkedin.com/in/ruben-rudov-106a22204/)
+[Adam's Linked-in](https://www.linkedin.com/in/adam-livne-36985b209/)
+
